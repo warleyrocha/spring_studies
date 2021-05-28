@@ -5,6 +5,7 @@ import br.com.devquick.hrworker.service.WorkerService;
 import br.com.devquick.hrworker.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class WorkerResource {
 
     private final Environment env;
 
+    @Value("${test.config}")
+    private String testConfig;
+
     @GetMapping
     public ResponseEntity<List<Worker>> findAll() {
         return ResponseEntity.ok(workerService.findAll());
@@ -34,4 +38,11 @@ public class WorkerResource {
         log.info("PORT = " + env.getProperty("local.server.port"));
         return ResponseUtil.wrapOrNotFound(workerService.findById(id));
     }
+
+    @GetMapping("/configs")
+    public ResponseEntity getConfigs() {
+        log.info("Config = " + testConfig);
+        return ResponseEntity.noContent().build();
+    }
+
 }
