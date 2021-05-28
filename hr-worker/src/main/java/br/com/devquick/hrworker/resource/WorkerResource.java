@@ -6,6 +6,7 @@ import br.com.devquick.hrworker.util.ResponseUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping(value = "worker")
 @RequiredArgsConstructor
 @Log4j2
+@RefreshScope
 public class WorkerResource {
 
     private final WorkerService workerService;
